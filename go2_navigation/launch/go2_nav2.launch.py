@@ -26,6 +26,10 @@ def generate_launch_description():
         launch_arguments={
             'params_file': nav2_config,
             'use_sim_time': 'false',
+            'remappings': str([
+                ('/odom', '/unitree_go2/odom'),
+                ('/cmd_vel', '/unitree_go2/cmd_vel')
+            ])
         }.items(),
     )
 

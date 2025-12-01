@@ -7,6 +7,7 @@ def generate_launch_description():
         Node(
             package='go2_perception', executable='cloud_accumulation',
             remappings=[
+                ('/utlidar/cloud_deskewed', '/unitree_go2/lidar/point_cloud'),
                 ('cloud', '/trans_cloud')
                 ],
             name='cloud_accumulation'
@@ -15,7 +16,8 @@ def generate_launch_description():
             package='go2_perception', executable='pointcloud_to_laserscan_node',
             remappings=[
                 ('cloud_in', '/trans_cloud'), 
-                ('scan', '/scan')
+                ('scan', '/scan'),
+                ('/utlidar/robot_pose', '/unitree_go2/pose')
                 ],
             parameters=[{
                 'target_frame': 'base_link',

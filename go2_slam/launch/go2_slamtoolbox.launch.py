@@ -17,14 +17,17 @@ def generate_launch_description():
         'mapper_params_online_async.yaml'
     )
 
-    # 包含slam_toolbox的launch文件
+ # 包含slam_toolbox的launch文件
     slam_toolbox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(slam_toolbox_dir, 'launch', 'online_async_launch.py')
         ]),
         launch_arguments={
-            'params_file': slam_toolbox_config,
+            'slam_params_file': slam_toolbox_config,
             'use_sim_time': 'false',
+            'remappings': str([
+                ('/odom', '/unitree_go2/odom')
+            ])
         }.items(),
     )
 

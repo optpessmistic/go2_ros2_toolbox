@@ -49,7 +49,12 @@ def generate_launch_description():
         package='go2_core',
         executable='go2_base',
         name='go2_base',
-        output='screen'
+        output='screen',
+        remappings=[
+            ('/utlidar/robot_pose', '/unitree_go2/pose'),
+            ('/cmd_vel', '/unitree_go2/cmd_vel'),
+            ('/odom', '/unitree_go2/odom')
+        ]
     )
 
     video_stream_node = Node(
