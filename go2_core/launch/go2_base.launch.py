@@ -50,6 +50,7 @@ def generate_launch_description():
         executable='go2_base',
         name='go2_base',
         output='screen',
+        parameters=[{'use_sim_time': False}],
         remappings=[
             ('/utlidar/robot_pose', '/unitree_go2/pose'),
             ('/cmd_vel', '/unitree_go2/cmd_vel'),

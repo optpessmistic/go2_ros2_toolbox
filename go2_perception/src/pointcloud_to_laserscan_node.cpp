@@ -162,6 +162,8 @@ void PointCloudToLaserScanNode::cloudCallback(
   // build laserscan output
   auto scan_msg = std::make_unique<sensor_msgs::msg::LaserScan>();
   scan_msg->header = cloud_msg->header;
+  // 使用当前系统时间替代机器人内部时间戳，避免 TF_OLD_DATA 警告
+  scan_msg->header.stamp = this->now();
   if (!target_frame_.empty()) {
     scan_msg->header.frame_id = target_frame_;
   }
