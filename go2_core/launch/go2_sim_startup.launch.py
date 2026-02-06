@@ -17,12 +17,12 @@ def generate_launch_description():
     go2_perception_dir = get_package_share_directory('go2_perception')
 
     # Set configuration file path
-    rviz_config_path = os.path.join(go2_core_dir, 'config', 'default.rviz')
+    rviz_config_path = os.path.join(go2_core_dir, 'config', 'sim_default.rviz')
 
     # 1. Launch base nodes
     go2_base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(go2_core_dir, 'launch', 'go2_base.launch.py')
+            os.path.join(go2_core_dir, 'launch', 'go2_sim_base.launch.py')
         ]),
         launch_arguments={
             'video_enable': 'true',
@@ -37,21 +37,21 @@ def generate_launch_description():
     # 2. Launch point cloud processing nodes
     pointcloud_process_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(go2_perception_dir, 'launch', 'go2_pointcloud_process.launch.py')
+            os.path.join(go2_perception_dir, 'launch', 'go2_sim_pointcloud_process.launch.py')
         ])
     )
 
     # 3. Launch SLAM toolbox
     slam_toolbox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(go2_slam_dir, 'launch', 'go2_slamtoolbox.launch.py')
+            os.path.join(go2_slam_dir, 'launch', 'go2_sim_slamtoolbox.launch.py')
         ])
     )
 
     # 4. Launch navigation system
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(go2_navigation_dir, 'launch', 'go2_nav2.launch.py')
+            os.path.join(go2_navigation_dir, 'launch', 'go2_sim_nav2.launch.py')
         ])
     )
 

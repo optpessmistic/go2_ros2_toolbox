@@ -11,20 +11,20 @@ std::vector<sensor_msgs::msg::PointCloud2::ConstSharedPtr> clouds;
 void cloudCallback(
 sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg)
 {
-    // 直接将新的点云添加到 clouds 中
+    // Directly add new point cloud to clouds
     clouds.push_back(cloud_msg);
 
-    // 如果 clouds 中的点云数量超过了一定的限制，删除最旧的点云
+    // If the number of point clouds in clouds exceeds a certain limit, delete the oldest point cloud
     if (clouds.size() > 30)
     {
         clouds.erase(clouds.begin());
     }
 
-    // 创建一个新的点云来存储合并后的点云
+    // Create a new point cloud to store the merged point cloud
     auto merged_cloud = std::make_shared<sensor_msgs::msg::PointCloud2>();
     *merged_cloud = *clouds[0];
 
-    // 遍历 clouds 并将所有的点云合并到 merged_cloud 中
+    // Traverse clouds and merge all point clouds into merged_cloud
     for (size_t it = 1; it < clouds.size(); it++)
     {
         merged_cloud->width += clouds[it]->width;
@@ -32,7 +32,7 @@ sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg)
         merged_cloud->data.insert(merged_cloud->data.end(), clouds[it]->data.begin(), clouds[it]->data.end());
     }
 
-    // 过滤掉高度高于1.0或低于0.2的点
+    // Filter out points with height above 1.0 or below 0.2
     sensor_msgs::msg::PointCloud2 filtered_cloud;
     filtered_cloud.header = merged_cloud->header;
     filtered_cloud.height = 1;
@@ -42,7 +42,7 @@ sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg)
     filtered_cloud.point_step = merged_cloud->point_step;
     filtered_cloud.row_step = 0;
 
-    // 遍历点云数据
+    // Traverse point cloud data
     for (size_t i = 0; i < merged_cloud->width * merged_cloud->height; i++)
     {
         float x, y, z;
@@ -50,7 +50,7 @@ sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg)
         memcpy(&y, &merged_cloud->data[i * merged_cloud->point_step + merged_cloud->fields[1].offset], sizeof(float));
         memcpy(&z, &merged_cloud->data[i * merged_cloud->point_step + merged_cloud->fields[2].offset], sizeof(float));
 
-        // 只保留高度在0.2到1.0之间的点
+        // Keep only points with height between 0.2 and 1.0
         if (z >= 0.2 && z <= 1.0) {
             filtered_cloud.data.insert(filtered_cloud.data.end(),
                                        &merged_cloud->data[i * merged_cloud->point_step],

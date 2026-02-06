@@ -14,7 +14,7 @@ def generate_launch_description():
     slam_toolbox_config = os.path.join(
         get_package_share_directory('go2_slam'),
         'config',
-        'mapper_params_online_async.yaml'
+        'mapper_params_sim_online_async.yaml'
     )
 
     # Include slam_toolbox launch file
@@ -25,6 +25,9 @@ def generate_launch_description():
         launch_arguments={
             'slam_params_file': slam_toolbox_config,
             'use_sim_time': 'false',
+            'remappings': str([
+                ('/odom', '/unitree_go2/odom')
+            ])
         }.items(),
     )
 

@@ -9,14 +9,14 @@ from cv_bridge import CvBridge
 import socket
 import time
 
-# GStreamer流配置
+# GStreamer stream configuration
 GSTREAMER_STR = "udpsrc address=230.1.1.1 port=1720 multicast-iface=eth0 ! application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! video/x-raw,width=1280,height=720,format=BGR ! appsink drop=1"
 
 class VideoStreamNode(Node):
     def __init__(self):
         super().__init__('video_stream_node')
         
-        # 从参数服务器获取配置
+        # Get configuration from parameter server
         self.declare_parameter('tcp_enable', False)
         self.declare_parameter('tcp_host', '127.0.0.1')
         self.declare_parameter('tcp_port', 5432)
@@ -29,16 +29,16 @@ class VideoStreamNode(Node):
         self.target_fps = self.get_parameter('target_fps').value
         self.image_topic = self.get_parameter('image_topic').value
         
-        # 初始化ROS2 Publisher
+        # Initialize ROS2 Publisher
         self.publisher = self.create_publisher(Image, self.image_topic, 10)
         self.bridge = CvBridge()
         
-        # 帧率控制参数
+        # Frame rate control parameters
         self.frame_interval = 1.0 / self.target_fps if self.target_fps > 0 else 0
         self.get_logger().info(f'帧率控制帧数: {self.target_fps}')
         self.get_logger().info(f'图像发布话题: {self.image_topic}')
 
-        # 初始化TCP服务器（如果启用）
+        # Initialize TCP server (if enabled)
         self.server_socket = None
         self.client_socket = None
         self.client_address = None
@@ -48,13 +48,13 @@ class VideoStreamNode(Node):
             self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.server_socket.bind((self.host, self.port))
             self.server_socket.listen(1)
-            self.server_socket.settimeout(0.01)  # 设置为10ms超时，非阻塞accept
-            self.get_logger().info(f'TCP服务器启动在 {self.host}:{self.port}')
+            self.server_socket.settimeout(0.01)  # Set to 10ms timeout, non-blocking accept
+            self.get_logger().info(f'TCP server started at {self.host}:{self.port}')
         else:
             self.get_logger().info('TCP转发功能已禁用')
 
     def wait_for_client(self):
-        """非阻塞等待客户端连接"""
+        """Non-blocking wait for client connection"""
         if not self.tcp_enable:
             return False
             
@@ -63,7 +63,7 @@ class VideoStreamNode(Node):
                 self.client_socket, self.client_address = self.server_socket.accept()
                 self.get_logger().info(f'客户端已连接: {self.client_address}')
             except socket.timeout:
-                # 没有客户端连接，直接返回
+                # No client connected, return directly
                 return False
             except Exception as e:
                 self.get_logger().error(f'等待客户端连接时出错: {str(e)}')
