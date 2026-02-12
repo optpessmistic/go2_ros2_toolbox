@@ -1,17 +1,19 @@
-# Simulation Environment
+# 🖥️ Simulation Environment
 
 This simulation environment is developed and tested with the following configuration:
 
-- **OS**: Ubuntu 22.04
-- **ROS2**: Humble
-- **Isaac Sim**: 4.5
-- **Isaac Lab**: 2.1.0
+- 🐧 **OS**: Ubuntu 22.04
+- 🐢 **ROS2**: Humble
+- 🌐 **Isaac Sim**: 4.5
+- 🧪 **Isaac Lab**: 2.1.0
 
-## Setup enviorment
+## 1. 🌐 Install Isaac Sim 4.5
 
-**Step 0:** Install [Isaac Sim 4.5](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/download.html) (Download and extract contents in `${HOME}/isaacsim`)
+Please follow the official NVIDIA documentation to install Isaac Sim:
+[Isaac Sim 4.5 Installation Guide](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/download.html)
 
-### Verifying the Isaac Sim installation
+After installation, assuming Isaac Sim is extracted/installed in `${HOME}/isaacsim`:
+
 ```bash
 # Isaac Sim root directory
 export ISAACSIM_PATH="${HOME}/isaacsim"
@@ -19,7 +21,9 @@ export ISAACSIM_PATH="${HOME}/isaacsim"
 export ISAACSIM_PYTHON_EXE="${ISAACSIM_PATH}/python.sh"
 ```
 
-Check that the simulator runs as expected:
+### 1.1 ✅ Verify Isaac Sim Installation
+
+Check that the simulator GUI runs as expected:
 
 ```bash
 # You can pass the argument "--help" to see all possible arguments.
@@ -36,14 +40,23 @@ ${ISAACSIM_PYTHON_EXE} -c "print('Isaac Sim configuration is now complete.')"
 ${ISAACSIM_PYTHON_EXE} ${ISAACSIM_PATH}/standalone_examples/api/isaacsim.core.api/add_cubes.py
 ```
 
-**Step 1:** Install Isaac Lab 2.1.0 
+if the above commands run successfully, Isaac Sim is installed correctly.
 
+---
 
-## Installing Isaac Lab
+## 2. 🧪 Install Isaac Lab 2.1.0
 
-You can follow the [IsaacLab](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html#verifying-the-isaac-sim-installation) or just follow the tutorial below
+You can follow the [Isaac Lab Installation Guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html) or use the steps below.
+
+### 2.1 📥 Clone Repository
 
 Clone the Isaac Lab repository into your workspace:
+
+```bash
+cd ~
+git clone https://github.com/isaac-sim/IsaacLab.git
+cd IsaacLab
+```
 
 ```bash
 ./isaaclab.sh --help
@@ -65,21 +78,22 @@ optional arguments:
    -u, --uv [NAME]      Create the uv environment for Isaac Lab. Default name is 'env_isaaclab'.
 ```
 
-### Creating the Isaac Sim Symbolic Link
+### 2.2 🔗 Create Symbolic Link
 
 Set up a symbolic link between the installed Isaac Sim root folder and `_isaac_sim` in the Isaac Lab directory. This allows Isaac Lab to locate the Isaac Sim Python modules and extensions.
 
 ```bash 
-# enter the cloned repository
+# Enter the cloned repository
 cd IsaacLab
-# create a symbolic link
+
+# Create a symbolic link pointing to your Isaac Sim installation
 ln -s ${ISAACSIM_PATH} _isaac_sim
 
 ln -s ${HOME}/isaacsim _isaac_sim
 
 ```
 
-### 2.3 Create Conda Environment (Optional)
+### 2.3 🐍 Create Conda Environment (Optional)
 
 Isaac Lab provides a script to quickly create a Conda environment:
 
@@ -91,13 +105,17 @@ Isaac Lab provides a script to quickly create a Conda environment:
 conda activate env_isaaclab
 ```
 
-### Installation
+### 2.4 📦 Install Dependencies
+
+Install the required extensions and learning frameworks:
 
 ```bash
 ./isaaclab.sh --install
 ```
 
-### Verifying the Isaac Lab installation
+### 2.5 ✅ Verify Isaac Lab Installation
+
+Run a simple example to verify the installation:
 
 ```bash
 python scripts/tutorials/00_sim/create_empty.py
@@ -107,13 +125,20 @@ If a window with an empty scene appears (similar to the image below), the instal
 
 ![Verify IsaacLab](./verify_isaaclab.jpg)
 
-If you see this, congratulations!
+---
 
-**Step 2:** Install Ros2 Humble
+## 3. 🐢 Install ROS2 Humble
 
-please install [Ros2 Humble](https://docs.ros.org/en/humble/index.html) with the offical installation guide
+For the simulation side, **ROS2 Humble** is recommended. Please follow the official guide:
+[ROS2 Humble Installation Guide](https://docs.ros.org/en/humble/index.html)
 
-**Step 3:** Run Unitree Go2 Simulation
+Make sure to configure `rosdep` and your environment variables after installation.
+
+---
+
+## 4. 🚀 Run Unitree Go2 Simulation
+
+### 4.1 🛠️ Setup Simulation Environment
 
 ```bash
 # Activate Isaac Lab environment
@@ -126,9 +151,13 @@ cd isaac-go2-ros2
 # Start the simulation
 python isaac_go2_ros2.py
 ```
-Once the simulation is loaded, the robot can be teleoperated by the keyboard
 
-**Step 4:** Quick Start
+Once the simulation is loaded, the robot can be teleoperated using the keyboard.
+
+### 4.2 ⚡ ROS2 Quick Start
+
+In a new terminal, launch the ROS2 nodes to interact with the simulated robot:
+
 ```bash
 # Source your ROS2 workspace
 source install/setup.bash
@@ -137,17 +166,17 @@ source install/setup.bash
 ros2 launch go2_core go2_sim_startup.launch.py
 ```
 
-### ROS Topics
+## 5. 📡 ROS Topics
 
 ### Published Topics
 
 | Component | Topic | Type | Frame |
 | :--- | :--- | :--- | :--- |
-| **Robot Pose** | `/utlidar/robot_pose` | `PoseStamped` | `odom` |
-| **LiDAR (Unitree)** | `/unitree_go2/lidar/point_cloud` | `PointCloud2` | `odom` |
-| **LaserScan** | `/scan` | `PointCloud2` | `base_link` |
-| **Camera Image** | `/camera/image_raw` | `Image` | - |
-| **Global Map** | `/map` | `OccupancyGrid` | `map` |
+| **🤖 Robot Pose** | `/utlidar/robot_pose` | `PoseStamped` | `odom` |
+| **🌩️ LiDAR (Unitree)** | `/unitree_go2/lidar/point_cloud` | `PointCloud2` | `odom` |
+| **📏 LaserScan** | `/scan` | `LaserScan` | `base_link` |
+| **📷 Camera Image** | `/camera/image_raw` | `Image` | - |
+| **🗺️ Global Map** | `/map` | `OccupancyGrid` | `map` |
 
 ---
 
