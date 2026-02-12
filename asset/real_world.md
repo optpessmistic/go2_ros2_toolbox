@@ -1,16 +1,22 @@
 # Real World
 
+## 🚀 Features
+
+- **LiDAR Integration**: Real-time point cloud processing and accumulation
+- **Camera Support**: GStreamer-based camera capture and streaming
+- **SLAM Capabilities**: Integration with SLAM Toolbox for mapping
+- **Navigation Stack**: Full Navigation2 integration for autonomous navigation
+- **ROS2 Native**: Built specifically for ROS2 Foxy ecosystem
+
 ## 📋 Prerequisites
 
 > **⚠️ Note: The features of this repository have only been tested on the onboard expansion dock computer of Go2 EDU. Compatibility and functionality on other environments (like PC wired to Go2 dock computer) have not been verified.**
 
 This toolbox is developed and tested on Unitree Go2 EDU with the expansion dock environment:
 
--**OS**: Ubuntu 20.04
-
--**ROS2**: Foxy
-
--**Firmware**: v1.1.7 (tested)
+- **OS**: Ubuntu 20.04
+- **ROS2**: Foxy
+- **Firmware**: v1.1.7 (tested)
 
 ## 🛠️ Installation
 
@@ -19,11 +25,8 @@ This toolbox is developed and tested on Unitree Go2 EDU with the expansion dock 
 First, install the official Unitree ROS2 package:
 
 ```bash
-
 # Follow the official installation guide
-
 # https://github.com/unitreerobotics/unitree_ros2
-
 ```
 
 ### 2. Install Dependencies
@@ -31,41 +34,26 @@ First, install the official Unitree ROS2 package:
 #### ROS2 Packages
 
 ```bash
-
-sudoapt-getinstallros-foxy-navigation2\
-
+sudo apt-get install ros-foxy-navigation2 \
                      ros-foxy-nav2-bringup \
-
-ros-foxy-pcl-ros\
-
+                     ros-foxy-pcl-ros \
                      ros-foxy-tf-transformations \
-
-ros-foxy-slam-toolbox
-
+                     ros-foxy-slam-toolbox
 ```
 
 ### 3. Build the Workspace
 
 ```bash
-
 # Create workspace
-
-mkdir-pgo2_ros2_ws/src
-
-cdgo2_ros2_ws/src
-
+mkdir -p go2_ros2_ws/src
+cd go2_ros2_ws/src
 
 # Clone repository
-
-gitclonehttps://github.com/andy-zhuo-02/go2_ros2_toolbox.git
-
+git clone https://github.com/andy-zhuo-02/go2_ros2_toolbox.git
 
 # Build
-
-cd..
-
-colconbuild
-
+cd ..
+colcon build
 ```
 
 ## 🎯 Usage
@@ -73,23 +61,17 @@ colconbuild
 ### Quick Start
 
 ```bash
-
 # Source the workspace
-
-sourceinstall/setup.bash
-
+source install/setup.bash
 
 # Launch the robot
-
-ros2launchgo2_corego2_startup.launch.py
-
+ros2 launch go2_core go2_startup.launch.py
 ```
 
 ### SLAM Operations
 
--**Map Serialization**: Save generated maps for later use
-
--**Map Deserialization**: Load previously saved maps
+- **Map Serialization**: Save generated maps for later use
+- **Map Deserialization**: Load previously saved maps
 
 ### Navigation
 
@@ -103,35 +85,50 @@ ros2launchgo2_corego2_startup.launch.py
 ### Frame Reference
 
 | Frame          | Description     | Source                      |
-
 | -------------- | --------------- | --------------------------- |
-
 | `/odom`      | Odometry frame  | Unitree Go2 odometry topic  |
-
 | `/map`       | Map frame       | SLAM Toolbox                |
-
-| `/base_link` | Base link frame | Unitree Go2 odometry topic |
+| `/base_link` | Base link frame | Unitree Go2 odometry topic |
 
 ### ROS Topics
 
 #### Publishers
 
 | Component           | Topic                       | Type        | Frame     |
-
 | ------------------- | --------------------------- | ----------- | --------- |
-
 | Robot Pose          | `/utlidar/robot_pose`     | PoseStamped | `/odom` |
-
 | LiDAR (Unitree)     | `/utlidar/cloud_deskewed` | PointCloud2 | `/odom` |
-
 | LiDAR (Accumulated) | `/trans_cloud`            | PointCloud2 | `/odom` |
-
 | Camera Image        | `/camera/image_raw`       | Image       | -         |
 
 #### Subscribers
 
 | Component        | Topic        | Type  | Frame        |
-
 | ---------------- | ------------ | ----- | ------------ |
-
 | Velocity Command | `/cmd_vel`   | Twist | `/base_link` |
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit issues and pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Unitree Robotics for the Go2 EDU platform
+- ROS2 community for the excellent navigation and SLAM tools
+- Contributors and users of this toolbox
+
+## 📞 Support
+
+If you encounter any issues or have questions, please:
+
+1. Check the [Issues](https://github.com/andy-zhuo-02/go2_ros2_toolbox/issues) page
+2. Create a new issue with detailed information
+3. Include system information and error logs
+
+---
+
+**Note**: This is an unofficial toolbox and is not affiliated with Unitree Robotics.

@@ -112,10 +112,28 @@ please install [Ros2 Humble](https://docs.ros.org/en/humble/index.html) with the
 #default conda env
 conda activate env_isaaclab
 #Clone the repo to you local directory
-git clone https://github.com/Zhefan-Xu/isaac-go2-ros2.git
+git clone https://github.com/optpessmistic/go2_ros2_toolbox
 
 cd isaac-go2-ros2
 
 python isaac_go2_ros2.py
 ```
 Once the simulation is loaded, the robot can be teleoperated by the keyboard
+
+**Step 4:** Quick Start
+```bash
+
+# Source the workspace
+source install/setup.bash
+
+# Launch the robot
+ros2 launch go2_core go2_sim_startup.launch.py
+
+```
+
+### ROS Topics
+
+#### Publishers
+
+
+
