@@ -7,17 +7,17 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
-    # Create LaunchDescription object
+    # 创建LaunchDescription对象
     ld = LaunchDescription()
 
-    # Set configuration file path
+    # 设置配置文件路径
     nav2_config = os.path.join(
         get_package_share_directory('go2_navigation'),
         'config',
         'nav2_params.yaml'
     )
 
-    # Include nav2 launch file
+    # 包含nav2的launch文件
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(
@@ -29,7 +29,7 @@ def generate_launch_description():
         }.items(),
     )
 
-    # Add launch action
+    # 添加launch动作
     ld.add_action(nav2_launch)
 
     return ld

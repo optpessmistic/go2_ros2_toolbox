@@ -117,35 +117,53 @@ ros2 launch go2_core go2_startup.launch.py
 
 ## 🔧 开发说明
 
-### 1. 坐标系参考
+### 坐标系参考
 
-系统中常见的主要坐标系如下：
+| 坐标系         | 说明           | 来源                   |
+| -------------- | -------------- | ---------------------- |
+| `/odom`      | 里程计坐标系   | Unitree Go2 里程计话题 |
+| `/map`       | 地图坐标系     | SLAM Toolbox           |
+| `/base_link` | 机器人基座坐标 | Unitree Go2 里程计话题 |
 
-| 坐标系         | 说明           | 来源                     |
-| -------------- | -------------- | ------------------------ |
-| `/odom`      | 里程计坐标系   | Unitree Go2 里程计话题   |
-| `/map`       | 地图坐标系     | SLAM Toolbox             |
-| `/base_link` | 机器人基座坐标 | Unitree Go2 里程计话题   |
+### ROS 话题
 
-开发过程中，建议使用 `tf2_tools` 或 RViz2 的 TF 视图检查坐标系是否配置正确。
+#### 发布者
 
-### 2. ROS 话题
+| 组件             | 话题名                      | 类型        | 坐标系    |
+| ---------------- | --------------------------- | ----------- | --------- |
+| 机器人位姿       | `/utlidar/robot_pose`     | PoseStamped | `/odom` |
+| 激光雷达（原始） | `/utlidar/cloud_deskewed` | PointCloud2 | `/odom` |
+| 激光雷达（累积） | `/trans_cloud`            | PointCloud2 | `/odom` |
+| 相机图像         | `/camera/image_raw`       | Image       | -         |
 
-#### 2.1 发布话题（Publishers）
-
-| 组件             | 话题名                       | 类型        | 坐标系    |
-| ---------------- | ---------------------------- | ----------- | --------- |
-| 机器人位姿       | `/utlidar/robot_pose`      | PoseStamped | `/odom` |
-| 激光雷达（原始） | `/utlidar/cloud_deskewed`  | PointCloud2 | `/odom` |
-| 激光雷达（累积） | `/trans_cloud`             | PointCloud2 | `/odom` |
-| 相机图像         | `/camera/image_raw`        | Image       | -         |
-
-#### 2.2 订阅话题（Subscribers）
+#### 订阅者
 
 | 组件         | 话题名      | 类型  | 坐标系        |
 | ------------ | ----------- | ----- | ------------- |
 | 速度控制命令 | `/cmd_vel`  | Twist | `/base_link` |
 
-根据以上话题，你可以方便地接入自己的上层应用（如路径规划、行为决策、可视化工具等），或对接其他 ROS2 生态中的包。
+## 🤝 贡献
 
+欢迎贡献代码！请随时提交 issue 或 pull request。
 
+## 📄 许可证
+
+本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
+
+## 🙏 鸣谢
+
+- Unitree Robotics 提供 Go2 EDU 平台
+- ROS2 社区的导航与 SLAM 工具
+- 本工具箱的贡献者与用户
+
+## 📞 支持
+
+如遇问题或有疑问，请：
+
+1. 查看 [Issues](https://github.com/andy-zhuo-02/go2_ros2_toolbox/issues) 页面
+2. 创建新 issue 并详细描述问题
+3. 附上系统信息与错误日志
+
+---
+
+**注意**：本工具箱为非官方项目，与 Unitree Robotics 无直接关联。

@@ -7,23 +7,23 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
-    # Get slam_toolbox package path
+    # 获取slam_toolbox包的路径
     slam_toolbox_dir = get_package_share_directory('slam_toolbox')
     
-    # Set configuration file path
+    # 设置配置文件路径
     slam_toolbox_config = os.path.join(
         get_package_share_directory('go2_slam'),
         'config',
         'mapper_params_online_async.yaml'
     )
 
-    # Include slam_toolbox launch file
+    # 包含slam_toolbox的launch文件
     slam_toolbox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(slam_toolbox_dir, 'launch', 'online_async_launch.py')
         ]),
         launch_arguments={
-            'slam_params_file': slam_toolbox_config,
+            'params_file': slam_toolbox_config,
             'use_sim_time': 'false',
         }.items(),
     )
