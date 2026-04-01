@@ -6,6 +6,9 @@ This simulation environment is developed and tested with the following configura
 - 🐢 **ROS2**: Humble
 - 🌐 **Isaac Sim**: 4.5
 - 🧪 **Isaac Lab**: 2.1.0
+- 🖥️ **Tested GPU**: NVIDIA GeForce RTX 3060
+
+Compatibility note: Isaac Sim 4.5 may fail to launch or show runtime issues on some RTX 50 series GPUs. If this happens, please try Isaac Sim 5.0 first.
 
 ## 1. 🌐 Install Isaac Sim 4.5
 
@@ -144,7 +147,7 @@ Make sure to configure `rosdep` and your environment variables after installatio
 # Activate Isaac Lab environment
 conda activate env_isaaclab
 #Clone the repo to you local directory
-git clone https://github.com/optpessmistic/go2_ros2_toolbox
+git clone https://github.com/Zhefan-Xu/isaac-go2-ros2.git
 
 cd isaac-go2-ros2
 

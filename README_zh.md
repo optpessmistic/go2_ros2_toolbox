@@ -31,6 +31,8 @@
 - **ROS2**：Humble  
 - **Isaac Sim**：4.5  
 - **Isaac Lab**：2.1.0  
+- **已测试显卡**：NVIDIA GeForce RTX 3060  
+- **兼容性说明**：部分 RTX 50 系显卡在 Isaac Sim 4.5 上可能报错或无法启动。若遇到该问题，建议优先尝试 Isaac Sim 5.0（本项目暂未完整验证）。  
 
 完整的仿真环境安装与使用说明请参考文档：  
 👉 [仿真环境说明（Simulation，中文）](./asset/simulation_zh.md)
