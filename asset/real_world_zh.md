@@ -148,7 +148,7 @@ ros2 launch go2_core go2_startup.launch.py
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
+本项目采用 MIT 许可证，详见 [LICENSE](../LICENSE) 文件。
 
 ## 🙏 鸣谢
 

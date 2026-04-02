@@ -30,12 +30,14 @@ We provide a simulation environment based on Isaac Sim and Isaac Lab for the Uni
 - **ROS2**: Humble
 - **Isaac Sim**: 4.5
 - **Isaac Lab**: 2.1.0
+- **Tested GPU**: NVIDIA GeForce RTX 3060
+- **Compatibility Note**: Isaac Sim 4.5 may not work properly on some RTX 50 series GPUs. If you encounter startup/runtime errors, try Isaac Sim 5.0 first (not fully validated in this project yet).
 
 Please refer to [Simulation](./asset/simulation.md) for more details.
 
 ## 🤖Real World
 
-The instruction for the real world installation is in [Real World](./asset/real_world.md) .
+The instruction for the real world installation is in [Real World](./asset/real_world.md).
 
 - **OS**: Ubuntu 20.04
 - **ROS2**: Foxy

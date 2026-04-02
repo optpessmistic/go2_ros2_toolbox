@@ -8,6 +8,9 @@
 - 🐢 **ROS2**: Humble
 - 🌐 **Isaac Sim**: 4.5
 - 🧪 **Isaac Lab**: 2.1.0
+- 🖥️ **已测试显卡**: NVIDIA GeForce RTX 3060
+
+兼容性说明：部分 RTX 50 系显卡在 Isaac Sim 4.5 上可能出现启动失败或运行异常。如遇到该问题，建议优先尝试 Isaac Sim 5.0。
 
 ## 1. 🌐 安装 Isaac Sim 4.5
 
@@ -126,7 +129,7 @@ python scripts/tutorials/00_sim/create_empty.py
 conda activate env_isaaclab
 
 # 克隆仿真仓库
-git clone https://github.com/optpessmistic/go2_ros2_toolbox
+git clone https://github.com/Zhefan-Xu/isaac-go2-ros2.git
 cd isaac-go2-ros2
 
 # 启动仿真
