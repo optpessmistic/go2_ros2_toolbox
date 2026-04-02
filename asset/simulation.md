@@ -92,8 +92,6 @@ cd IsaacLab
 # Create a symbolic link pointing to your Isaac Sim installation
 ln -s ${ISAACSIM_PATH} _isaac_sim
 
-ln -s ${HOME}/isaacsim _isaac_sim
-
 ```
 
 ### 2.3 🐍 Create Conda Environment (Optional)

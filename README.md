@@ -37,7 +37,7 @@ Please refer to [Simulation](./asset/simulation.md) for more details.
 
 ## 🤖Real World
 
-The instruction for the real world installation is in [Real World](./asset/real_world.md) .
+The instruction for the real world installation is in [Real World](./asset/real_world.md).
 
 - **OS**: Ubuntu 20.04
 - **ROS2**: Foxy

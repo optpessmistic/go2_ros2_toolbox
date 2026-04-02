@@ -1,4 +1,4 @@
 {
-    "cmake.sourceDirectory": "/wsl.localhost/Ubuntu-24.04/home/singleduck/go2_ros2_toolbox/go2_slam",
+    "cmake.sourceDirectory": "${workspaceFolder}/go2_slam",
     "cmake.ignoreCMakeListsMissing": true
 }
